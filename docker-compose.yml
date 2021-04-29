@@ -1,0 +1,34 @@
+version: "2"
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-server-80
+    command: --default-authentication-plugin=mysql_native_password
+    working_dir: /application
+    volumes:
+      - .:/application
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_DATABASE=udemy
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=123
+    ports:
+      - "8082:3306"
+  website:
+    container_name: php72
+    build:
+      context: ./
+      args:
+        user: zonarolo
+        uid: 1000
+    links:
+      - "mysql:database"
+    volumes:
+      - ./src:/var/www/html
+    environment:
+      - APACHE_RUN_USER=#1000
+    ports:
+      - 8000:80
+    depends_on:
+      - mysql
