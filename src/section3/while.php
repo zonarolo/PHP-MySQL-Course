@@ -11,7 +11,7 @@
   <?php
   /**
    * While loop - Don't know the number of iterations
-   * Do-while loop
+   * Do-while loop - First Do then While
    * For loop
    * Foreach loop
    */
@@ -22,6 +22,14 @@
     echo $x . "<br>";
     $x++;
   }
+
+
+  $cookie = 1;
+  do {
+    echo "I love cookies! <br>";
+    $cookie++;
+  } while ($cookie < 1);
+
   ?>
 </body>
 
